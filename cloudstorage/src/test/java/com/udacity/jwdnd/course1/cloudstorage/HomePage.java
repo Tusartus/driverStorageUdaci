@@ -16,11 +16,7 @@ import java.util.List;
 public class HomePage {
     @FindBy(id = "logout")
     private WebElement logoutButton;
-    // define fields for LOGOUT:
-    // @FindBy(xpath = "//*[@id=\"logoutDiv\"]//button")
-    // private WebElement logoutBtn;
-    // define fields for NOTES:
-    //@FindBy(xpath = "//a[@id='nav-notes-tab']")
+
     @FindBy(id = "nav-notes-tab")
     private WebElement noteTab;
 
@@ -51,24 +47,32 @@ public class HomePage {
 
     private final WebDriver driver;
 
-    //define fields for Credentials
+    //defining field for Credentials to use it when needed
     @FindBy(id = "nav-credentials-tab")
-    //@FindBy(xpath = "//a[@id='nav-notes-tab']")
+
     private WebElement credentialTab;
+
     @FindBy(id = "add-credential-btn")
     private WebElement addCredentailBtn;
+
     @FindBy(id = "credential-url")
     private WebElement credentialurl;
+
     @FindBy(xpath = "//*[@id='credential-url']")
     private WebElement credentailurl;
+
     @FindBy(id = "credential-username")
     private WebElement credentialusername;
+
     @FindBy(id = "credential-password")
     private WebElement credentialpassword;
+
     @FindBy(id = "credential-save-btn")
     private WebElement credentialsubmitBtn;
+
     @FindBy(id = "edit-credential-btn")
     private WebElement editcredentialBtn;
+
     @FindBy(id = "delete-credential-btn")
     private WebElement deletecredentailBtn;
 
@@ -97,6 +101,7 @@ public class HomePage {
 
         wait_modal.until(ExpectedConditions.visibilityOf(driver.findElement(By.id("note-title"))));
         wait_modal.until(ExpectedConditions.visibilityOf(driver.findElement(By.id("note-description"))));
+
         ((JavascriptExecutor) driver).executeScript("arguments[0].value='" + "test" + "';", driver.findElement(By.id("note-title")));
         ((JavascriptExecutor) driver).executeScript("arguments[0].value='" + "testdescription" + "';", driver.findElement(By.id("note-description")));
 
@@ -109,16 +114,20 @@ public class HomePage {
     public void editNote(){
         WebDriverWait wait = new WebDriverWait(driver, 200);
         waitForVisibility(editNoteBtn);
+
         ((JavascriptExecutor) driver).executeScript("arguments[0].click();", editNoteBtn);
         ((JavascriptExecutor) driver).executeScript("arguments[0].value='" + "edittest" + "';", driver.findElement(By.id("note-title")));
         ((JavascriptExecutor) driver).executeScript("arguments[0].value='" + "edittestdescription" + "';", driver.findElement(By.id("note-description")));
+
         ((JavascriptExecutor) driver).executeScript("arguments[0].click();", submitBtn);
         System.out.println("note edited");
+
     }
     public void deleteNote(){
 
         System.out.println("the delete note method");
         WebDriverWait wait = new WebDriverWait(driver, 200);
+
         waitForVisibility(deleteNoteBtn);
         ((JavascriptExecutor) driver).executeScript("arguments[0].click();", deleteNoteBtn);
 
@@ -162,6 +171,7 @@ public class HomePage {
         wait_modal.until(ExpectedConditions.visibilityOf(driver.findElement(By.id("credential-url"))));
         wait_modal.until(ExpectedConditions.visibilityOf(driver.findElement(By.id("credential-username"))));
         wait_modal.until(ExpectedConditions.visibilityOf(driver.findElement(By.id("credential-password"))));
+
         ((JavascriptExecutor) driver).executeScript("arguments[0].value='" + "example.gmail" + "';", driver.findElement(By.id("credential-url")));
         ((JavascriptExecutor) driver).executeScript("arguments[0].value='" + "user1" + "';", driver.findElement(By.id("credential-username")));
         ((JavascriptExecutor) driver).executeScript("arguments[0].value='" + "user123" + "';", driver.findElement(By.id("credential-password")));
@@ -175,12 +185,14 @@ public class HomePage {
         int rowcount= driver.findElements(By.xpath("//*[@id=\"credentialTable\"]/tbody/tr")).size();
         int columncount = driver.findElements(By.xpath("//*[@id=\"credentialTable\"]/tbody/tr[2]/*")).size();
         List<String> details = new ArrayList();
+
         for (int i=2;i<=rowcount;i++) {
             for(int j=2;j<=columncount;j++) {
                 String credentialvalue = wait_modal.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//*[@id=\"credentialTable\"]/tbody/tr["+i+"]/td["+j+"]")))).getText();
                 details.add(credentialvalue);
             }
         }
+
         return details;
     }
 

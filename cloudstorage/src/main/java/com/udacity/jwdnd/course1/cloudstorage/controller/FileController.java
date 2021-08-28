@@ -29,7 +29,7 @@ public class FileController {
     }
 
     @PostMapping("/uploadFile")
-    public String submit(@RequestParam("file") MultipartFile file, Authentication authentication, RedirectAttributes redirectAttributes, Model model) throws IOException {
+    public String submitFileUpload(@RequestParam("file") MultipartFile file, Authentication authentication, RedirectAttributes redirectAttributes, Model model) throws IOException {
         String username = authentication.getName();
         User user = userService.getUser(username);
 
@@ -55,7 +55,7 @@ public class FileController {
     }
 
     @GetMapping("/deleteFile/{fileId}")
-    public String deleteFile(@PathVariable int fileId, Authentication authentication, RedirectAttributes redirectAttributes){
+    public String deleteFiles(@PathVariable int fileId, Authentication authentication, RedirectAttributes redirectAttributes){
         String username = authentication.getName();
         User user = userService.getUser(username);
 
@@ -73,7 +73,7 @@ public class FileController {
     }
 
     @GetMapping("/viewFile/{fileId}")
-    public ResponseEntity viewFile(@PathVariable("fileId") int fileId){
+    public ResponseEntity viewMoreFile(@PathVariable("fileId") int fileId){
         File file = fileService.getFilebyFileId(fileId);
         String fileName = file.getFileName();
         return ResponseEntity.ok()

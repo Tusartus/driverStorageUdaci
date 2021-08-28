@@ -73,21 +73,27 @@ class CloudStorageApplicationTests {
 		String password = "admin123";
 		String firstname = "Arthus";
 		String lastname = "nire";
+
+		//get url plus signup
 		driver.get("http://localhost:" + this.port+"/signup");
+
 		SignupPage signupPage = new SignupPage(driver);
 		signupPage.signup(firstname,lastname,username,password);
 		Assertions.assertEquals("You successfully signed up! Please continue to the login page.",driver.findElement(By.id("success-msg")).getText());
+
 		driver.get("http://localhost:" + this.port+"/login");
 		LoginPage loginPage = new LoginPage(driver);
 		loginPage.login(username,password);
 		Assertions.assertEquals("Home",driver.getTitle());
 		driver.findElement(By.id("logout")).submit();
-		Thread.sleep(5000);
+		//wait 6 second
+		Thread.sleep(6000);
 		Assertions.assertNotEquals("Home",driver.getTitle());
+
 		driver.get("http://localhost:" + this.port+"/home");
-		Thread.sleep(3000);
+		Thread.sleep(4000);
 		Assertions.assertNotEquals("Home",driver.getTitle());
-		Thread.sleep(3000);
+		Thread.sleep(4000);
 	}
 
 	//testing indivual then the test pass
@@ -97,10 +103,14 @@ class CloudStorageApplicationTests {
 		String password = "admin123";
 		String firstname = "Arthus";
 		String lastname = "nire";
+
+		//signup
 		driver.get("http://localhost:" + this.port+"/signup");
 		SignupPage signupPage = new SignupPage(driver);
 		signupPage.signup(firstname,lastname,username,password);
 		Assertions.assertEquals("You successfully signed up! Please continue to the login page.",driver.findElement(By.id("success-msg")).getText());
+
+		//login
 		driver.get("http://localhost:" + this.port+"/login");
 		LoginPage loginPage = new LoginPage(driver);
 		loginPage.login(username,password);
@@ -109,15 +119,17 @@ class CloudStorageApplicationTests {
 
 	@Test
 	public void testAddNote() {
+		//signup
 		driver.get("http://localhost:" + this.port + "/signup");
 		SignupPage signUpPage = new SignupPage(driver);
-		signUpPage.signup("Zhongni","Kui","admin","admin123");
+		signUpPage.signup("arthus","nire","admina2","admin123");
 
-
+        //login
 		driver.get("http://localhost:" + this.port + "/login");
 		LoginPage loginPage = new LoginPage(driver);
 		loginPage.login("admina2", "admin123");
 
+		//got to homepage
 		driver.get("http://localhost:" + this.port + "/home");
 		HomePage homePage = new HomePage(driver);
 		homePage.createNote();
@@ -129,18 +141,21 @@ class CloudStorageApplicationTests {
 	//testing indivual then the test pass
 	@Test
 	public void testDeleteNote() {
+		//signup
 		driver.get("http://localhost:" + this.port + "/signup");
 		SignupPage signUpPage = new SignupPage(driver);
 		signUpPage.signup("arthus","nire","admina2","admin123");
 
-
+          //login
 		driver.get("http://localhost:" + this.port + "/login");
 		LoginPage loginPage = new LoginPage(driver);
 		loginPage.login("admina2", "admin123");
 
+		//homePage
 		driver.get("http://localhost:" + this.port + "/home");
 		HomePage homePage = new HomePage(driver);
 		homePage.createNote();
+
 		driver.get("http://localhost:" + this.port + "/home");
 		homePage.clickNoteTab();
 		homePage.deleteNote();
@@ -153,9 +168,10 @@ class CloudStorageApplicationTests {
 
 	@Test
 	public void testEditNote() {
+
 		driver.get("http://localhost:" + this.port + "/signup");
 		SignupPage signUpPage = new SignupPage(driver);
-		signUpPage.signup("arthus","nire","admina2","admin123");
+		signUpPage.signup("Arthus","nire","admina2","admin123");
 
 
 		driver.get("http://localhost:" + this.port + "/login");
@@ -165,14 +181,10 @@ class CloudStorageApplicationTests {
 		driver.get("http://localhost:" + this.port + "/home");
 		HomePage homePage = new HomePage(driver);
 		homePage.createNote();
-		//driver.get("http://localhost:" + this.port + "/home");
-		//homePage.clickNoteTab();
-		//homePage.editNote();
-		//driver.get("http://localhost:" + this.port + "/home");
-		//homePage.clickNoteTab();
+
 		String noteTitleText= homePage.getNoteTitleText();
 		System.out.println("the edited note text is"+noteTitleText);
-		//Assertions.assertEquals("edittest", homePage.getNoteTitleText());
+
 	}
 
 

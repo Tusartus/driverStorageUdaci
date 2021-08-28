@@ -28,7 +28,7 @@ public class CredentialController {
     }
 
     @PostMapping("/uploadCredential")
-    public String submitCredential(@ModelAttribute Credential credential, RedirectAttributes redirectAttributes, Authentication authentication) throws IOException {
+    public String submitCredentialUser(@ModelAttribute Credential credential, RedirectAttributes redirectAttributes, Authentication authentication) throws IOException {
         String username = authentication.getName();
         User user = userService.getUser(username);
 
@@ -55,7 +55,7 @@ public class CredentialController {
     }
 
     @GetMapping("/deleteCredential/{credentialId}")
-    public String deleteNote(@PathVariable Integer credentialId, Authentication authentication, RedirectAttributes redirectAttributes){
+    public String deleteNotes(@PathVariable Integer credentialId, Authentication authentication, RedirectAttributes redirectAttributes){
         String username = authentication.getName();
         User user = userService.getUser(username);
 

@@ -27,7 +27,7 @@ public class NoteController {
     }
 
     @PostMapping("/uploadNote")
-    public String submitNote(@ModelAttribute Note note, RedirectAttributes redirectAttributes, Authentication authentication) throws IOException {
+    public String submitNoteSave(@ModelAttribute Note note, RedirectAttributes redirectAttributes, Authentication authentication) throws IOException {
         String username = authentication.getName();
         User user = userService.getUser(username);
 
@@ -52,7 +52,7 @@ public class NoteController {
     }
 
     @GetMapping("/deleteNote/{noteId}")
-    public String deleteNote(@PathVariable Integer noteId, Authentication authentication, RedirectAttributes redirectAttributes){
+    public String deletePerIdNote(@PathVariable Integer noteId, Authentication authentication, RedirectAttributes redirectAttributes){
         String username = authentication.getName();
         User user = userService.getUser(username);
 

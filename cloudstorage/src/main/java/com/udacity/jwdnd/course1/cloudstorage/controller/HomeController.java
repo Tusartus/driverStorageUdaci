@@ -26,7 +26,7 @@ public class HomeController {
     }
 
     @GetMapping("/home")
-    public String homeView(Authentication authentication, Model model) {
+    public String homeViewPage(Authentication authentication, Model model) {
         String username = authentication.getName();
         User user = userService.getUser(username);
         if (user!=null){
